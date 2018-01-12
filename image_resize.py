@@ -4,6 +4,13 @@ import os, re
 new_width = int(input("Enter new image width in px: "))
 new_height = int(input("Enter new image height in px: "))
 
+output_file = input("Choose output file format. Enter j for .jpeg or p for .png ")
+
+if output_file.lower() == 'j':
+    output_file = 'jpeg'
+elif output_file.lower() == 'p':
+    output_file = 'png'
+
 thumbnail_resize = int(input("Thumbnail resize in percent: "))
 
 for photo in os.listdir('.'):
@@ -41,11 +48,11 @@ for photo in os.listdir('.'):
         
         resizeIm = croppedIm.resize((int(width_cropped / int((width_cropped / img_x))), 
                                 int(height_cropped / int((height_cropped / img_y)))))       
-        resizeIm.save(file + '_small', 'jpeg')
+        resizeIm.save(file + '_small', output_file)
 
         width, height = resizeIm.size
         resize_thumbnail = resizeIm.resize((int(width * (thumbnail_resize / 100)), int(height * (thumbnail_resize / 100))))
-        resize_thumbnail.save(file + '_thumbnail', 'jpeg')
+        resize_thumbnail.save(file + '_thumbnail', output_file)
         
 
 
